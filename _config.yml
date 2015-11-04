@@ -7,8 +7,10 @@ title: zlsun's blog
 subtitle:
 description:
 author: zlsun
-language:
-timezone:
+language: zh-Hans
+timezone: Asia/Shanghai
+avatar: /images/avatar.png
+since: 2015
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -63,9 +65,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: pacman
+theme: next
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+- type: git
+  repo: git@github.com:zlsun/zlsun.github.io.git
