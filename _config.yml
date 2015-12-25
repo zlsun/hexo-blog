@@ -72,3 +72,14 @@ theme: next
 deploy:
 - type: git
   repo: git@github.com:zlsun/zlsun.github.io.git
+
+# =============================================================================
+# NexT Theme configuration
+# =============================================================================
+
+# Social links
+social:
+  github: https://github.com/zlsun
+
+creative_commons: by-nc-sa
+
