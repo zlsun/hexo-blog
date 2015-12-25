@@ -1,2 +1,4 @@
 # hexo-blog
-My Hexo blog
+
+Source of my Hexo blog.
+
