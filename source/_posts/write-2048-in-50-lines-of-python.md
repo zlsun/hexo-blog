@@ -1,10 +1,12 @@
-title: 50行Python代码实现2048
-tags: 2048
+title: 50 行Python代码实现 2048
+tags:
+  - '2048'
 categories:
   - Python
-date: 2016-03-10 16:42:06
+date: 2016-03-10 16:42:00
 ---
-代码如下：
+
+# 代码
 
 ```py
 #!/bin/python3
@@ -66,4 +68,3 @@ while True:
 
 ![](/images/write-2048-in-50-lines-of-python/1.png)
 ![](/images/write-2048-in-50-lines-of-python/2.png)
-

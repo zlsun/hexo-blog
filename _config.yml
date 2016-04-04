@@ -73,6 +73,15 @@ deploy:
 - type: git
   repo: git@github.com:zlsun/zlsun.github.io.git
 
+marked:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+
 # =============================================================================
 # NexT Theme configuration
 # =============================================================================
