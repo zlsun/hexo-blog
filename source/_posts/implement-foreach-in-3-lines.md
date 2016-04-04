@@ -107,14 +107,14 @@ for (std::vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
 ```
 `???`是相应迭代器和元素的类型，很不幸，在 C++11 之前没有办法可以自动推导类型。
 
-为了解决这个问题，我们只能动用GCC编译器的拓展`typeof`，`typeof` 用法类似 `sizeof`，只不过它返回的不是类型大小，而是类型本身。
+为了解决这个问题，我们只能动用GCC编译器的拓展`__typeof__`，`__typeof__` 用法类似 `sizeof`，只不过它返回的不是类型大小，而是类型本身。
 
-使用`typeof`后：
+使用`__typeof__`后：
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin(); it != v.end(); ++it) { \
-        typeof(*it) i = *it;
+    for (__typeof__(v.begin()) it = v.begin(); it != v.end(); ++it) { \
+        __typeof__(*it) i = *it;
 ```
 
 用起来是这样：
@@ -151,7 +151,7 @@ foreach (i, v) {
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin()，typeof(*it) i = *it; \
+    for (__typeof__(v.begin()) it = v.begin()，__typeof__(*it) i = *it; \
         it != v.end(); \
         i = *++it) \
 ```
@@ -162,25 +162,25 @@ foreach (i, v) {
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin(); it != v.end(); ++it) \
-        for (typeof(*it) i = *it; ???; ???)
+    for (__typeof__(v.begin()) it = v.begin(); it != v.end(); ++it) \
+        for (__typeof__(*it) i = *it; ???; ???)
 ```
 
 接下来，我们得让里面的`for`只循环一次。可以用一个`loop`变量实现：
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin(); it != v.end(); ++it) \
-        for (typeof(*it) i = *it; loop; loop = false)
+    for (__typeof__(v.begin()) it = v.begin(); it != v.end(); ++it) \
+        for (__typeof__(*it) i = *it; loop; loop = false)
 ```
 
 那么问题来了，`loop`该定义在哪呢？再用一个`for`？
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin(); it != v.end(); ++it) \
+    for (__typeof__(v.begin()) it = v.begin(); it != v.end(); ++it) \
         for (bool loop = true; loop;) \
-            for (typeof(*it) i = *it; loop; loop = false)
+            for (__typeof__(*it) i = *it; loop; loop = false)
 ```
 
 Great！It works！
@@ -193,9 +193,9 @@ Great！It works！
 
 ```cpp
 #define foreach(i, v) \
-    for (typeof(v.begin()) it = v.begin(); it != v.end(); ++it) \
+    for (__typeof__(v.begin()) it = v.begin(); it != v.end(); ++it) \
         if (bool loop = true) \
-            for (typeof(*it) i = *it; loop; loop = false)
+            for (__typeof__(*it) i = *it; loop; loop = false)
 ```
 
 ## #2 调整循环顺序
@@ -207,8 +207,8 @@ Great！It works！
 ```cpp
 #define foreach(i, v) \
     if (bool loop = true) \
-        for (typeof(v.begin()) it = v.begin(); loop; loop = false) \
-            for (typeof(*it) i = *it; it != v.end(); i = *++it)
+        for (__typeof__(v.begin()) it = v.begin(); loop; loop = false) \
+            for (__typeof__(*it) i = *it; it != v.end(); i = *++it)
 ```
 
 ## #3 加上括号,变量名混淆
@@ -216,8 +216,8 @@ Great！It works！
 ```cpp
 #define foreach(i, v) \
     if (bool __loop = true) \
-        for (typeof((v).begin()) __it = (v).begin(); __loop; __loop = false) \
-            for (typeof(*__it) i = *__it; __it != (v).end(); i = *++__it)
+        for (__typeof__((v).begin()) __it = (v).begin(); __loop; __loop = false) \
+            for (__typeof__(*__it) i = *__it; __it != (v).end(); i = *++__it)
 ```
 
 加上括号是为了避免类似`foreach(i, *p)`的语句出错，`.`的优先级比大多数运算符高。
@@ -236,8 +236,8 @@ foreach (i : lst) {
 
 ```cpp
 #define foreach(i, v) if (bool __loop = true) \
-    for (typeof((v).begin()) __it = (v).begin(); __loop; __loop = false) \
-        for (typeof(*__it) i = *__it; __it != (v).end(); i = *++__it)
+    for (__typeof__((v).begin()) __it = (v).begin(); __loop; __loop = false) \
+        for (__typeof__(*__it) i = *__it; __it != (v).end(); i = *++__it)
 ```
 
 # 总结
