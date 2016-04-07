@@ -244,11 +244,3 @@ foreach (i : lst) {
 
 就这样，我们使用 3 行代码就实现了类似`BOOST_FOREACH`的功能，是不是很 <ruby>简单<rt>hei mo fa</rt></ruby> 呢。
 
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-
-<span style='font-size:40px'>
-(╯‵□′)╯︵┴─┴ 简单个毛啊，C++11 大法好，快用 C++11 啊！
-</span>
-
