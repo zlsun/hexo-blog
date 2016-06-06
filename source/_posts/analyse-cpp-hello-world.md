@@ -134,7 +134,7 @@ template <class charT, class traits>
 std::basic_ostream<charT, traits>& endl(std::basic_ostream<charT, traits>& os);
 ```
 
-`cout << endl` 会调用 `basic\_ostream<charT, traits>` 的运算符重载成员函数：
+`cout << endl` 会调用 `basic_ostream<charT, traits>` 的运算符重载成员函数：
 
 ```cpp
 typedef basic_ostream<charT, traits> ostream_type;
@@ -163,4 +163,5 @@ inline basic_ostream<_CharT, _Traits>& endl(basic_ostream<_CharT, _Traits>& __os
 这条语句有两个作用：
 1. 结束`main`函数。
 2. 使用返回值调用`std::exit`。
+
 根据标准，当这条语句位于`main`函数最末尾时可以省略。
